@@ -10,7 +10,7 @@ def get_data():
     # Drop unneeded columns
     film_data = film_data.drop(columns=["runtimeMinutes", "director_name", "numVotes"])
     # select range due to computing limitations
-    return film_data[30000:30010]
+    return film_data[30000:40000]
 
 # #Function to calculate the cosine similarities by first creating a matrix of values for frequency of
 # genres (bag of words) and then calcuating the cosine similarities between genres for each film
@@ -24,9 +24,9 @@ def calc_data(film_data):
     merged = film_data["merged"]
     count = CountVectorizer()
     count_matrix = count.fit_transform(merged)
-    print(count_matrix)
+    # print(count_matrix)
     sparse_matrix = count_matrix.toarray()
-    print(sparse_matrix)
+    # print(sparse_matrix)
     calc_cosines = cosine_similarity(sparse_matrix, sparse_matrix)
     return calc_cosines
 
@@ -63,4 +63,3 @@ cosine_sims = calc_data(film_data)
 def get_recs(selected_title):
     recommendations = rec_films(selected_title, film_data, cosine_sims)
     return recommendations
-print(cosine_sims)
