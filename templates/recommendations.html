@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations | Contented Films by Hamza</title>
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+
+    <!-- CSS Reset -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+
+    <!-- Milligram CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+
+    <style>
+        .container {
+            width: 95%;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .container>* {
+            margin: 2rem 0;
+        }
+
+        select {
+            width: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Headings -->
+        <a href="{{ url_for('home') }}">
+            <h1>Contented Films</h1>
+        </a>
+        <h2>A film recommendation system utilising content-based filtering</h2>
+        <h3>The top 24 films we recommend for you based on your selection of {{selection}}:</h3>
+
+        <!-- Table of recommendations -->
+        <table>
+            <thead>
+                <th>Title</th>
+                <th>IMDB ID / Link</th>
+            </thead>
+            <tbody>
+                <!-- Loops through both lists in parallel -->
+                {% for title, imdb_id in titles|zip(imdb_ids) %}
+                <tr>
+                    <td>{{title}}</td>
+                    <td><a href="https://www.imdb.com/title/{{imdb_id}}/">{{imdb_id}}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <footer>
+            <p>Copyright &copy; 2021, Hamza Abdullah. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+</body>
+
+</html>
